@@ -1,70 +1,32 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Inter, Oswald } from 'next/font/google'
+import { Archivo_Black, IBM_Plex_Mono, Source_Sans_3 } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const oswald = Oswald({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-oswald',
-  display: 'swap',
-})
+const archivo = Archivo_Black({ subsets: ['latin'], weight: '400', variable: '--font-archivo', display: 'swap' })
+const source = Source_Sans_3({ subsets: ['latin'], variable: '--font-source', display: 'swap' })
+const plex = IBM_Plex_Mono({ subsets: ['latin'], variable: '--font-plex', display: 'swap', weight: ['400', '500', '600'] })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'A1 Services | You Call We Haul — Junk Removal & Dumpster Rental',
-    template: '%s | A1 Services',
-  },
-  description:
-    'A1 Services provides fast, reliable junk removal, dumpster rental, hauling, and light demolition. You call, we haul. Locally owned and operated.',
-  keywords: [
-    'junk removal',
-    'dumpster rental',
-    'hauling',
-    'debris removal',
-    'demolition',
-    'skid steer services',
-    'A1 Services',
-  ],
-  generator: 'v0.app',
-  icons: {
-    icon: '/images/a1-services-logo.png',
-    apple: '/images/a1-services-logo.png',
-  },
+  metadataBase: new URL('https://novagentec.com'),
+  title: 'NOVAGENTEC · Commercial systems',
+  description: 'Brand, websites and connected systems for local businesses, growing teams and creators.',
+  keywords: ['NOVAGENTEC', 'commercial systems', 'web infrastructure', 'connected operations', 'Creator Core', 'FleetFlow'],
+  generator: 'NOVAGENTEC',
+  icons: { icon: '/icon.svg', apple: '/apple-icon.png' },
   openGraph: {
-    title: 'A1 Services | You Call We Haul',
-    description:
-      'Fast, reliable junk removal, dumpster rental, hauling, and light demolition. You call, we haul.',
+    title: 'NOVAGENTEC · Commercial systems',
+    description: 'Your business. Connected.',
     type: 'website',
   },
 }
 
-export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#111318',
-}
+export const viewport: Viewport = { colorScheme: 'light', themeColor: '#f3f5f4' }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${oswald.variable} bg-background`}>
-      <body className="font-sans antialiased">
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-      </body>
+    <html lang="en" className={`${archivo.variable} ${source.variable} ${plex.variable}`}>
+      <body><SiteHeader />{children}</body>
     </html>
   )
 }
